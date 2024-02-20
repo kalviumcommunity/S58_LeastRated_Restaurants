@@ -1,19 +1,39 @@
 const express = require('express');
 const app = express();
-require("dotenv").config();
-const port = process.env.PORT || 7007;
-import {Data} from "./Config/Data"
+const dotenv=require('dotenv');
+dotenv.config()
+const port = 8008 ?? 7777;
+const {connection}=require('./Config/Data')
+const Data= require('./Config/Data');
+const { restaurantsModel } = require('./Model/restaurant');
 
-// define the ping route with the response in JSON
+
 app.get('/ping', (req, res) => {
   res.json({ message: 'pong' });
-
 });
 
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`🚀 server running on Port ${port}`);
+app.post('/postdata',(req,res)=>{
+  restaurantsModel.insertMany(Data)
+  .then((result) => {
+    console.log('Inserted', result.length, 'documents into the collection');
+  })
+  .catch((error) => {
+    console.error('Error inserting documents:', error);
   });
-}
+})
 
-module.exports = app;
+
+app.listen(port,async () => { 
+  try {
+    await connection;
+    console.log("Connected to DB successfully")
+    
+  } catch (error) {
+     console.log("Error connecting to DB");
+     console.log(error);
+  }
+
+  console.log(`Server is listening on port ${port}`);
+
+
+})

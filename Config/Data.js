@@ -71,4 +71,4 @@ let Data=[
     }
 ]
 
-export {Data};
+module.exports=Data
