@@ -1,0 +1,58 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header{
+  /* border: 2px solid red; */
+  background-color: rgb(51, 51, 123);
+  width: 98.9vw;
+  height: 120px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.main{
+  background-image: linear-gradient(rgb(98, 98, 208),rgb(189, 193, 246));
+  width: 98.9vw;
+  height: 100vh;
+}
+.logo{
+  /* border: 2px solid white; */
+  width: 100px;
+  height: 90px;
+  margin-left: 5%;
+}
+.header input{
+  width: 20%;
+  height: 35px;
+  font-size: 18px;
+  margin-left: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.home-logo{
+  height: 45px;
+  width: 50px;
+  margin-left: 15%;
+}
+.dots-logo{
+  height: 45px;
+  width: 50px;
+  border-radius: 100%;
+}
+.header button{
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+  margin-right: 7%;
+  background-color: rgb(200, 216, 247);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.share-btn{
+  height: 45px;
+  width: 50px;
+  margin-right: 5%;
+  
+}
