@@ -2,32 +2,43 @@ const express = require("express");
 const app = express();
 const dotenv=require('dotenv');
 dotenv.config()
-const port = 8008 ?? 7777;
-const {connection}=require('./Config/Data')
-const Data= require('./Config/Data');
+const port = 8008 || 7777;
+const {connection}=require('./Config/db')
+const Data= require('./Config/Data.json');
 const { restaurantsModel } = require('./Model/restaurant');
-const app = require('./routes')
+const { RestaurantRouter } = require("./routes");
+
+app.use(express.json())
+
+app.get("/",(req,res)=>{
+  res.send("Hello World!")
+})
 
 app.get('/ping', (req, res) => {
   res.json({ message: 'pong' });
 });
 
-app.post('/postdata',(req,res)=>{
-  restaurantsModel.insertMany(Data)
-  .then((result) => {
-    console.log('Inserted', result.length, 'documents into the collection');
-  })
-.catch((error) => {
-   console.error('Error inserting documents:', error);
-   res.status(500).json({ error: 'Failed to insert data' });
-   });
-})
-app.use('/routes', app);
+app.post('/postdata',async(req,res)=>{
 
-app.listen(port,async () => { 
   try {
+    console.log(Data,restaurantsModel)
+    await restaurantsModel.insertMany(Data,{ timeout: 30000 })
+    res.send("Added")
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+
+
+app.use('/routes', RestaurantRouter);
+
+
+app.listen(port,async() => { 
+  try {
+    console.log(connection)
     await connection;
-    console.log("Connected to DB successfully")
+    console.log("Connected to DB successfully");
     
   } catch (error) {
      console.log("Error connecting to DB");
