@@ -11,15 +11,10 @@ function Home() {
     <>
         <div className='header'>
             <img className='logo' src={logo} alt="logo" />
-
             <input className='search' type="text" placeholder='Search'/>
-
             <img className='home-logo' src={home_logo} alt="home_logo" />
-
             <img className='dots-logo' src={dots_icons} alt="dots-icons" />
-
             <img className='share-btn' src={share} alt="share" />
-
             <button>Sign Up</button>
 
         </div>
