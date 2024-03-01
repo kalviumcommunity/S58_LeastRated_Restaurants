@@ -4,8 +4,15 @@ import logo from '../assets/logo.png'
 import home_logo from '../assets/home_logo.png'
 import dots_icons from '../assets/dots_icons.png'
 import share from '../assets/share.png'
+import Enity from './enity'
 
 function Home() {
+
+  const sampleData = {
+    restroName:"Sky Beach",
+    restroLocation:"Vaishali Nagar",
+    restroRatings:"3.6"
+  }
 
   return (
     <>
@@ -19,6 +26,15 @@ function Home() {
 
         </div>
         <div className='main'>
+          <div>
+
+            <Enity 
+              restroName={sampleData.restroName} 
+              restroLocation={sampleData.restroLocation} 
+              restroRatings={sampleData.restroRatings}>
+            </Enity>
+
+          </div>
 
         </div>
     </>
