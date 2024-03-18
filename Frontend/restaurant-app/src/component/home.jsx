@@ -1,18 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import '../App.css'
 import logo from '../assets/logo.png'
 import home_logo from '../assets/home_logo.png'
 import dots_icons from '../assets/dots_icons.png'
 import share from '../assets/share.png'
-import Enity from './enity'
+
 
 function Home() {
 
-  const sampleData = {
-    restroName:"Sky Beach",
-    restroLocation:"Vaishali Nagar",
-    restroRatings:"3.6"
-  }
+  const[data,setData]=useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/routes/Getdata")
+    .then(res=>{
+      console.log(res.data)
+      setData(res.data)
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  },[])
+
 
   return (
     <>
@@ -27,13 +36,9 @@ function Home() {
         </div>
         <div className='main'>
           <div>
-
-            <Enity 
-              restroName={sampleData.restroName} 
-              restroLocation={sampleData.restroLocation} 
-              restroRatings={sampleData.restroRatings}>
-            </Enity>
-
+            {data.map(user=>{
+              return <div>{user.Name}</div>
+            })}
           </div>
 
         </div>
