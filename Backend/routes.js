@@ -20,6 +20,18 @@ RestaurantRouter.post('/postdata',(req,res)=>{
    res.status(500).json({ error: 'Failed to insert data' });
    });
 })
+
+RestaurantRouter.post('/addRestaurant',(req,res)=>{
+ 
+  console.log(req.body)
+  // console.log(data)
+  restaurantsModel.insertMany(req.body).then(
+    // console.log("Posted")
+    res.send({message : "submitted"})
+  ).catch((error)=>{
+    console.log("Error:", error)
+  })
+})
   
 //Read : Get all the restaurant details
 console.log(restaurantsModel);
