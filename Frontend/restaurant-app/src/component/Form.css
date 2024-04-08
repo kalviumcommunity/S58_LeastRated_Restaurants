@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: linear-gradient(rgb(162, 98, 208),rgb(189, 193, 246));
+    width: 100vh;
+    height: 100vh;
+}
+
+form{
+    margin-left: 60%;
+    padding-top: 15%;
+}
+
+.box{
+    border: 3px solid black;
+    width: 90vh;
+    padding-block: 5vh;
+    background-color: rgb(228, 203, 254);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 50px 7px #f1f1f1;
+}
+
+.box>input{
+    width: 50%;
+    height: 9%;
+    margin: 5px;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 8px;
+    border-radius: 5px;
+    
+}
+
+.head{
+    width: 50%;
+    height: 60px;
+    text-align: center;
+}
+
+.submit-btn button{
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(53, 19, 104);
+    box-shadow: 0 0 8px #000000;
+    margin-top: 15px;
+}
+
+form p{
+    color: red;
+}

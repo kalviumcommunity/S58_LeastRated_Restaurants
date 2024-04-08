@@ -6,7 +6,7 @@
 
 .header{
   /* border: 2px solid red; */
-  background-color: rgb(51, 51, 123);
+  background-color: rgb(94, 51, 123);
   width: 98.9vw;
   height: 120px;
   display: flex;
@@ -14,7 +14,7 @@
   align-items: center;
 }
 .main{
-  background-image: linear-gradient(rgb(98, 98, 208),rgb(189, 193, 246));
+  background-image: linear-gradient(rgb(162, 98, 208),rgb(189, 193, 246));
   width: 98.9vw;
   height: 100vh;
 }
@@ -46,7 +46,7 @@
   height: 40px;
   font-size: 18px;
   margin-right: 7%;
-  background-color: rgb(200, 216, 247);
+  background-color: rgb(229, 200, 247);
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
