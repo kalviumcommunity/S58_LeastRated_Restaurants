@@ -49,12 +49,19 @@ RestaurantRouter.get('/Getdata', async (req,res)=>{
 
 //Update : Update the data 
 
-RestaurantRouter.put('/Updatedata', async (req,res)=>{
+RestaurantRouter.put('/Updatedata/id', async (req,res)=>{
+  console.log(req.body,"body")
+  console.log(req.params,"params")
   try {
     Updatedata = await restaurantsModel.findByIdAndUpdate(
         req.params.id,
-        req.body,
-        { new: true }
+        {
+          "Id": req.body.Id,
+          "Name": req.body.Name,
+          "Location": req.body.Location,
+          "Ratings": req.body.Ratings,
+          "Reviews": req.body.Reviews,
+        }
     );
     res.json(Updatedata);
 
@@ -63,10 +70,12 @@ RestaurantRouter.put('/Updatedata', async (req,res)=>{
     res.status(500).json({ error: 'Failed to update the data' });
   }
 })
+
+
   
 //Delete : Delete the data
 
-RestaurantRouter.delete('/Deletedata', async (req,res)=>{
+RestaurantRouter.delete('/Deletedata/:id', async (req,res)=>{
     try {
         const deletedata = await restaurantsModel.findByIdAndDelete(req.params.id);
         res.json(deletedata);
@@ -76,5 +85,7 @@ RestaurantRouter.delete('/Deletedata', async (req,res)=>{
         res.status(500).json({ error: 'Failed to delete the data' });
     }
 })
+
+
 
 module.exports={RestaurantRouter}
