@@ -2,11 +2,14 @@ const express = require("express");
 const app = express();
 const dotenv=require('dotenv');
 dotenv.config()
-const port = 8008 || 7777;
+const port = 8080 || 7777;
 const {connection}=require('./Config/db')
 const Data= require('./Config/Data.json');
 const { restaurantsModel } = require('./Model/restaurant');
 const { RestaurantRouter } = require("./routes");
+const cors = require('cors');
+
+app.use(cors())
 
 app.use(express.json())
 
