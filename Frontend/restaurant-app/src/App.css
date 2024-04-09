@@ -15,8 +15,9 @@
 }
 .main{
   background-image: linear-gradient(rgb(162, 98, 208),rgb(189, 193, 246));
+  border: 2px solid red;
   width: 98.9vw;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .logo{
   /* border: 2px solid white; */

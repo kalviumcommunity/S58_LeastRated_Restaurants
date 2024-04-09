@@ -5,11 +5,13 @@ import logo from '../assets/logo.png'
 import home_logo from '../assets/home_logo.png'
 import dots_icons from '../assets/dots_icons.png'
 import share from '../assets/share.png'
-
+import Form from './Form.jsx'
+import { Link } from 'react-router-dom'
 
 function Home() {
 
   const[data,setData]=useState([]);
+  const[showform,SetShowform]=useState(false);
 
   useEffect(() => {
     axios.get("http://localhost:8080/routes/Getdata")
@@ -22,6 +24,12 @@ function Home() {
     })
   },[])
 
+  const handleAddClick=()=>{
+    SetShowform(true)
+  }
+  const handleDelete=(id)=>{
+    axios.delete(`http://localhost:8080/routes/Deletedata/${id}`).then((user)=>{console.log("deleted")}).catch(error=> console.log("Error while deleting:",error))
+  }
 
   return (
     <>
@@ -37,11 +45,29 @@ function Home() {
         <div className='main'>
           <div>
             {data.map(user=>{
-              return <div>{user.Name}</div>
+              return (
+                <> 
+                  <div>{user.Id}</div>
+                  <div>{user.Name}</div>
+                  <div>{user.Location}</div>
+                  <div>{user.Ratings}</div>
+                  <div>{user.Reviews}</div>
+                <Link to={`./update/${user._id}`}>
+                  <button>Update</button>
+                
+                </Link>
+                  <button onClick={()=>handleDelete(user._id)}>Delete</button>
+                </>
+              )
             })}
           </div>
+          <Link to="/form">
+              <button onClick={handleAddClick}>Add Restaurant+++++</button>
+          </Link>
+          
 
         </div>
+        {showform && <Form />} 
     </>
   )
 }
