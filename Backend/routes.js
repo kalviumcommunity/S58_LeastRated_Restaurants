@@ -3,6 +3,7 @@ const RestaurantRouter = express.Router();
 const { restaurantsModel } = require('./Model/restaurant');
 const port=7007 ?? 7777
 const Data= require('./Config/Data');
+const Joi=require('joi');
 
 
 RestaurantRouter.get("/",(req,res)=>{
@@ -19,12 +20,22 @@ RestaurantRouter.post('/postdata',(req,res)=>{
    console.error('Error inserting documents:', error);
    res.status(500).json({ error: 'Failed to insert data' });
    });
-})
+});
+
+const Schema = Joi.object({
+  ID: Joi.number().required(),
+  Name: Joi.string().required(),
+  Location: Joi.string().required(),
+  Ratings: Joi.number().required(),
+  Reviews: Joi.string().required()
+});
 
 RestaurantRouter.post('/addRestaurant',(req,res)=>{
- 
+  const {error} = Schema.validate(req.body);
   console.log(req.body)
-  // console.log(data)
+  if(error){
+    return res.status(400).json({ error: error.details[0].message });
+  }
   restaurantsModel.insertMany(req.body).then(
     // console.log("Posted")
     res.send({message : "submitted"})
