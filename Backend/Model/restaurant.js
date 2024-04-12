@@ -1,9 +1,9 @@
 const mongoose=require('mongoose')
 const restaurantSchema=mongoose.Schema({
-        Id:Number,
+        ID:Number,
         Name: String,
         Location: String,
-        Ratings: String,
+        Ratings: Number,
         Reviews: String
 })
 const restaurantsModel= mongoose.model("restaurant",restaurantSchema)

@@ -22,7 +22,7 @@ const Form = () => {
         e.preventDefault()
         console.log(field,"field")
         // setSubmit(true)
-        axios.post('http://localhost:8080/routes/addRestaurant',field).then(res=>{navigate("/")}).catch(error=>{console.log("error")})
+        axios.post('http://localhost:8080/routes/addRestaurant',field).then(res=>{navigate("/")}).catch(error=>{console.log("error",error)})
 
         
 
@@ -38,7 +38,7 @@ const Form = () => {
                 </div>
                 
                 <input 
-                    value={field.ID} type="text" placeholder='Enter new ID' onChange={(e)=>setField({...field,ID:e.target.value})}
+                    value={field.ID} type="number" placeholder='Enter new ID' onChange={(e)=>setField({...field,ID:e.target.value})}
                 />
                 {submitted==true && field.ID==""?<p>Enter your ID</p>:null}
                 <input 
@@ -50,7 +50,7 @@ const Form = () => {
                 />
                 {submitted==true && field.Location==""?<p>Enter new Restaurant Name</p>:null}
                 <input 
-                    value={field.Ratings} type="text" placeholder='Enter new Ratings' onChange={(e)=>setField({...field,Ratings:e.target.value})}
+                    value={field.Ratings} type="number" placeholder='Enter new Ratings' onChange={(e)=>setField({...field,Ratings:e.target.value})}
                 />
                 {submitted==true && field.Ratings==""?<p>Enter New Restaurant Ratings</p>:null}
                 <input 
