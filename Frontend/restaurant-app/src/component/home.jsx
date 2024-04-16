@@ -12,7 +12,8 @@ function Home() {
 
   const[data,setData]=useState([]);
   const[showform,SetShowform]=useState(false);
-
+  let[isloggedin,setisloggedIn]=useState(false)
+  
   useEffect(() => {
     axios.get("http://localhost:8080/routes/Getdata")
     .then(res=>{
@@ -22,13 +23,19 @@ function Home() {
     .catch(error=>{
       console.log(error);
     })
-  },[])
+    setisloggedIn(document.cookie)
+  },[isloggedin])
 
   const handleAddClick=()=>{
     SetShowform(true)
   }
   const handleDelete=(id)=>{
     axios.delete(`http://localhost:8080/routes/Deletedata/${id}`).then((user)=>{console.log("deleted")}).catch(error=> console.log("Error while deleting:",error))
+  }
+
+  const handlelogout=()=>{
+    document.cookie = "token=; expires=Tue, 19 Jan 1976 03:14:07 GMT; path=/"
+    axios.get("http://localhost:8080/routes/logout").then(res=>{alert(res.data.message),setisloggedIn(false)} ).catch(error=>{console.log(error)})
   }
 
   return (
@@ -39,7 +46,14 @@ function Home() {
             <img className='home-logo' src={home_logo} alt="home_logo" />
             <img className='dots-logo' src={dots_icons} alt="dots-icons" />
             <img className='share-btn' src={share} alt="share" />
-            <button>Sign Up</button>
+            {
+              isloggedin ? <button onClick={handlelogout}>Log Out</button> :<Link to="/Sign-In-Page">
+              <button>Log in</button>
+            </Link>
+            }
+            
+            
+           
 
         </div>
         <div className='main'>
