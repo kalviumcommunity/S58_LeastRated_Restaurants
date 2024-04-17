@@ -4,6 +4,7 @@ const { restaurantsModel } = require('./Model/restaurant');
 const port=7007 ?? 7777
 const Data= require('./Config/Data');
 const Joi=require('joi');
+const { userModel } = require('./Model/user');
 
 
 RestaurantRouter.get("/",(req,res)=>{
@@ -43,6 +44,23 @@ RestaurantRouter.post('/addRestaurant',(req,res)=>{
     console.log("Error:", error)
   })
 })
+
+RestaurantRouter.post('/login', (req, res) => {
+  userModel.findOne({username:req.body.username})
+    .then(result => {
+      console.log(result);
+      res.send({ token : result.username});
+      
+    })
+    .catch(error => {
+      console.log("Error:", error);
+    });
+});
+
+RestaurantRouter.get('/logout', (req, res) => {
+  res.send({message : "User is logged out"})
+});
+
   
 //Read : Get all the restaurant details
 console.log(restaurantsModel);
