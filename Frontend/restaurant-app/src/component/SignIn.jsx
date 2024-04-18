@@ -29,7 +29,7 @@ const SiginIn = () => {
 
     axios.post('http://localhost:8080/routes/login',field)
     .then((res)=>{
-      document.cookie = `token=${res.data.token }; max-age=900000; path=/`
+      document.cookie = `token=${res.data.Token }; max-age=900000; path=/`
 
       navigate("/")
     })
