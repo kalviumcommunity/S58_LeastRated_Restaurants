@@ -30,7 +30,8 @@ const Schema = Joi.object({
   Name: Joi.string().required(),
   Location: Joi.string().required(),
   Ratings: Joi.number().required(),
-  Reviews: Joi.string().required()
+  Reviews: Joi.string().required(),
+  Created_by: Joi.string().required()
 });
 
 RestaurantRouter.post('/addRestaurant',(req,res)=>{
@@ -73,9 +74,34 @@ console.log(restaurantsModel);
 
 RestaurantRouter.get('/Getdata', async (req,res)=>{
   console.log(restaurantsModel)
+  console.log(req.query)
+  if(req.query.Created_by){
+    try {
+      const alldata= await restaurantsModel.find({Created_by:req.query.Created_by});
+      res.json(alldata);
+    } catch (error) {
+      console.log('Error getting the data:', error);
+      res.status(500).json({ error: 'Failed to get the data' });
+    }
+  }
+  else{
+    try {
+      const alldata= await restaurantsModel.find();
+      res.json(alldata);
+    } catch (error) {
+      console.log('Error getting the data:', error);
+      res.status(500).json({ error: 'Failed to get the data' });
+    }
+  }
+  
+})
+
+RestaurantRouter.get('/GetUser', async (req,res)=>{
+  console.log(userModel)
   try {
-    const alldata= await restaurantsModel.find();
-    res.json(alldata);
+    const alldata= await userModel.find();
+    const usernames = alldata.map(user => user.username);
+    res.json(usernames);
   } catch (error) {
     console.log('Error getting the data:', error);
     res.status(500).json({ error: 'Failed to get the data' });
@@ -96,6 +122,7 @@ RestaurantRouter.put('/Updatedata/id', async (req,res)=>{
           "Location": req.body.Location,
           "Ratings": req.body.Ratings,
           "Reviews": req.body.Reviews,
+          "Created_by": req.body.Created_by
         }
     );
     res.json(Updatedata);
