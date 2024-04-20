@@ -4,7 +4,9 @@ const { restaurantsModel } = require('./Model/restaurant');
 const port=7007 ?? 7777
 const Data= require('./Config/Data');
 const Joi=require('joi');
+const jwt=require('jsonwebtoken');
 const { userModel } = require('./Model/user');
+
 
 
 RestaurantRouter.get("/",(req,res)=>{
@@ -46,15 +48,19 @@ RestaurantRouter.post('/addRestaurant',(req,res)=>{
 })
 
 RestaurantRouter.post('/login', (req, res) => {
-  userModel.findOne({username:req.body.username})
-    .then(result => {
-      console.log(result);
-      res.send({ token : result.username});
-      
+  const user = { username : req.body.username }
+
+  if(user){
+    jwt.sign(user.username, process.env.SECRET_KEY, function(error, token){
+      if(error){
+        res.send({message : error})
+      }
+      else{
+        res.send({Token : token}) 
+      }
     })
-    .catch(error => {
-      console.log("Error:", error);
-    });
+  }
+
 });
 
 RestaurantRouter.get('/logout', (req, res) => {
