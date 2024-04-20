@@ -4,7 +4,8 @@ const restaurantSchema=mongoose.Schema({
         Name: String,
         Location: String,
         Ratings: Number,
-        Reviews: String
+        Reviews: String,
+        Created_by:String
 })
 const restaurantsModel= mongoose.model("restaurant",restaurantSchema)
 
